@@ -23,3 +23,8 @@ No. This is an independent, community-maintained project that is not affiliated 
 ## ⚠️ Ethical Use Only
 All content here is for **defensive research and educational use only**.  
 No raw threat actor logs are hosted, and all indicators have been sanitized and redacted where appropriate.
+
+## ❓ Long Term Plan
+* Markdown compatibility with Obsidian Notes. This has already started!
+* Completely translate and map Black Basta ransomware group infrastructure based off of Matrix chat logs.
+* Create detection opportunities for Black Basta indicators.
