@@ -10,19 +10,12 @@ In addition to adversary tracking, this project also focuses on:
 ---
 
 ## 🤝 How Can I Contribute?
-Reach out to me via **LinkedIn** or **Discord** if you're interested in collaborating.  
-All contributors will be **screened** prior to repository access, and all submissions will be reviewed before they’re merged.
-
----
-
-## 🏢 Is This Affiliated With a Company?
-No. This is an independent, community-maintained project that is not affiliated with or owned by any commercial entity or employer.
+Reach out to me via **LinkedIn** or **Discord** if you're interested in collaborating.
 
 ---
 
 ## ⚠️ Ethical Use Only
-All content here is for **defensive research and educational use only**.  
-No raw threat actor logs are hosted, and all indicators have been sanitized and redacted where appropriate.
+All content here is for **defensive research and educational use only**.
 
 ## ❓ Long Term Plan
 * Markdown compatibility with Obsidian Notes. This has already started!
