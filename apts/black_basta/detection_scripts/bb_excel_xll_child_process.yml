@@ -1,0 +1,37 @@
+title: Black Basta Suspicious Excel XLL To Script Or Installer Chain
+id: 6c9644c6-9dd4-4cc9-8a04-6943cc7f8fe7
+status: experimental
+description: Detects Excel spawning script hosts, msiexec, or rundll32 in a manner consistent with Black Basta XLL, VBS, MSI, and decoy-driven delivery testing.
+references:
+  - https://attack.mitre.org/techniques/T1566/001/
+  - https://attack.mitre.org/techniques/T1204/002/
+author: PoseidonsCave
+date: 2026-04-12
+tags:
+  - attack.initial-access
+  - attack.execution
+  - attack.t1566.001
+  - attack.t1204.002
+  - blackbasta
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  parent:
+    ParentImage|endswith: '\EXCEL.EXE'
+  child:
+    Image|endswith:
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\msiexec.exe'
+      - '\rundll32.exe'
+  command_indicators:
+    CommandLine|contains:
+      - '.xll'
+      - '.vbs'
+      - '.msi'
+  condition: parent and child and command_indicators
+falsepositives:
+  - Legitimate enterprise add-ins that launch helper scripts or installers
+  - Software deployment or update workflows using Excel-based automation
+level: high

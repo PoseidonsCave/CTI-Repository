@@ -1,119 +1,159 @@
-# 📌 Indicators of Compromise (IOCs) – Black Basta
+# Black Basta Indicators of Compromise
 
-This file contains curated, enriched indicators extracted from Matrix communications and related intelligence during the Black Basta case study. Each entry includes context, relevance, and associated behaviors. Indicators are defanged for safety and correlation.
+The indicators below were extracted from the full Black Basta source set and sanitized for defensive use. Working credentials seen in the material are not reproduced.
 
----
+## Priority Network Indicators
 
-## 🌐 Domains
+### Domains and Services
 
-| Domain                   | Context                      | Tags                     |
-|--------------------------|-------------------------------|--------------------------|
-| miratechgroup[.]com      | Possible victim infrastructure | #recon #targeting        |
-| nbetshopkipstri[.]com    | Possible C2 Server             | #c2 #infrastructure       |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `matrix[.]bestflowers247[.]online` | Internal communications | Primary Matrix server used by the group |
+| `matrixtcFJHPDblmt2rg[.]network` | Internal communications | Secondary Matrix server used by the group |
+| `betshopkipstri[.]com` | Redirector / proxy | Cobalt Strike proxy host |
+| `rokllold279[.]com` | Redirector / proxy | COBA proxy domain |
+| `rokllofrold29[.]com` | Redirector / proxy | COBA proxy domain |
+| `tsvsnjv[.]com` | Redirector / proxy | COBA proxy domain |
+| `lkcagar[.]com` | Redirector / proxy | COBA proxy domain |
+| `temp[.]sh` | File hosting | VBS and binary payload staging |
+| `qaz[.]im` | File hosting | Alternate XLL, PDF, MSI, and VBS staging |
+| `backconnect[.]org` | SOCKS bot support | Used to generate or retrieve backconnect builds |
+| `ghostsocks[.]net` | SOCKS bot support | Associated with GhostSocks references in 2024 |
+| `rdweb-page[.]com` | Likely lure or sender domain | Appears in mailer-style configuration data |
+| `rdweb-page[.]net` | Likely lure or sender domain | Appears in mailer-style configuration data |
+| `connectedriver[.]com` | Sender or lure domain | Appears in mailer-style configuration data |
+| `martiangathering[.]com` | Sender or lure domain | Appears in mailer-style configuration data |
+| `3kelincijp[.]com` | Sender or lure domain | Appears in mailer-style configuration data |
+| `kingprovpn[.]com` | VPN-related service | Referenced in internal conversations |
 
-(Additional domains from IP-resolved infrastructure will be added in the corresponding sections below.)
+### Onion Services
 
----
+| Indicator | Context |
+| --- | --- |
+| `orders44vz5yl7y6xajzxsdo2n6niaqu73ty4tx6ncwqnc752yzae4ad[.]onion` | Cobalt Strike hosting test |
+| `stniiomyjliimcgkvdszvgen3eaaoz55hreqqx6o77yvmpwt7gklffqd[.]onion` | Leak blog |
+| `bpeln2aqs66qqfuex2cvcyjiy5ggcwbyh5nbmxzxt6daamkmpmufv4qd[.]onion` | Admin panel |
 
-## 🧠 Behavioral Tags (Examples Across Indicators)
+### IP Addresses
 
-- `#c2`
-- `#vpn`
-- `#ftp`
-- `#esxi`
-- `#onion`
-- `#malware_analysis`
-- `#proxy_infra`
-- `#victim_host`
+| Indicator | Role |
+| --- | --- |
+| `88.214.26[.]33` | Cobalt Strike proxy |
+| `147.78.47[.]48` | Dedicated Cobalt Strike server |
+| `179.60.149[.]235` | VPN node |
+| `88.214.25[.]244` | VPN node |
+| `94.228.169[.]123` | VBS stager |
+| `178.236.247[.]73` | VBS stager |
+| `94.228.169[.]143` | RDP launch / test host |
+| `91.191.209[.]110` | DarkGate-related server |
+| `176.174.149[.]37` | DarkGate-related infrastructure reference |
+| `5.8.18[.]230` | COBA proxy |
+| `45.227.254[.]7` | COBA teamserver |
+| `88.214.25[.]250` | COBA proxy |
+| `194.165.17[.]9` | COBA teamserver |
+| `88.214.26[.]31` | COBA proxy |
+| `194.165.16[.]19` | COBA teamserver |
+| `46.161.27[.]152` | COBA proxy |
+| `141.98.81[.]48` | COBA teamserver |
+| `104.238.60[.]64` | RDP used for XLL testing |
+| `172.20.10[.]3` | Internal host from an initial beacon |
+| `45.155.249[.]55` | Brute Ratel test listener |
+| `51.89.62[.]202` | Multi-port infrastructure node |
+| `91.191.209[.]70` | Later COBA teamserver |
+| `141.98.9[.]152` | Later COBA teamserver |
+| `179.60.149[.]10` | Later COBA teamserver |
+| `5.8.18[.]20` | SOCKS / SSH command host |
+| `5.161.250[.]129` | SOCKS node |
+| `91.196.70[.]160` | SOCKS pool |
+| `37.1.200[.]232` | SOCKS pool |
+| `38.180.0[.]28` | SOCKS pool |
+| `38.180.20[.]163` | SOCKS pool |
+| `185.142.238[.]31` | SOCKS pool |
 
----
+## Delivery and Payload URLs
 
-## 🔐 Onion URLs
+| Indicator | Context |
+| --- | --- |
+| `https[:]//temp[.]sh/bpmcR/Download_VBS_slush[.]rar` | VBS archive |
+| `https[:]//temp[.]sh/BQGxO/Download_VBS_shaft[.]rar` | VBS archive |
+| `https[:]//temp[.]sh/aXTBv/Download_VBS_lava[.]rar` | VBS archive |
+| `https[:]//temp[.]sh/AWvjU/cob1_443_x86[.]bin` | Payload binary |
+| `http[:]//88.119.175[.]245/WNJD1/LDmdkA` | Randomized delivery link observed during XLL debugging |
+| `http[:]//94.228.169[.]143:2351/vjikfjxb` | Hardcoded link referenced during XLL/VBS troubleshooting |
+| `https[:]//dropmefiles[.]com/4WjCy` | Database or access-list exchange link referenced in October 2023 |
 
-| URL (Defanged) | Context |
-|----------------|---------|
-| `stniiomyjliimcg[...]onion` | Possible blog / staging site |
-| `bpeln2aqs66qq[...]onion`  | Undisclosed panel or channel |
-| `mo2oqqbpemfruv[...]onion` | Includes user/pass combo      |
-| `orders44vz5yl7[...]onion` | Unknown (likely shop/panel)   |
+## Host and Detection Artifacts
 
----
+### File and Delivery Artifacts
 
-## 🌍 IP Addresses
+| Artifact | Context |
+| --- | --- |
+| `XLL` | Preferred Europe-focused attachment format by September 26 |
+| `VBS` | Common payload wrapper and launcher |
+| `MSI` | Used as a replacement extension to avoid immediate detection |
+| `LNK` | Mentioned as an alternate delivery method requiring DLL support |
+| `PDF + XLL` | Decoy-plus-payload combination used in testing |
+| `.przhow632` | Post-encryption file extension referenced during decryptor support |
+| `FORTI_VALID.txt` | Fortinet validation set |
+| `AUTH_VALID.txt` | Authentication validation set |
+| `SONIC_VALID.txt` | SonicWall validation set |
+| `WG_VALID.txt` | WireGuard validation set |
+| `CISCO_VALID_ITEMS.txt` | Cisco validation set |
+| `VALID_BRUT_RDWEB.txt` | RDWeb validation or brute-force set |
+| `VALID_BRUT_CISCO.txt` | Cisco validation or brute-force set |
 
-| IP Address          | Role / Context                  | Domain (if known)         | Tags                |
-|---------------------|----------------------------------|----------------------------|---------------------|
-| 5.8.18[.]230        | Proxy (?)                     | rokllold279[.]com          | #proxy #coba        |
-| 5.188.87[.]58       | Unspecified                      | -                          | #infrastructure     |
-| 5.188.206[.]50      | C2 server                        | -                          | #c2 #root           |
-| 23.81.246[.]14      | Proxy (?)                        | -                          | #proxy              |
-| 23.81.246[.]165     | Proxy (?)                        | -                          | #proxy              |
-| 45.227.254[.]7      | C2 server                        | -                          | #c2 #root           |
-| 45.227.252[.]244    | C2 server                        | xavfgrtgrg[.]com           | #c2 #root           |
-| 45.227.252[.]246    | C2 server                        | -                          | #c2 #root           |
-| 46.161.27[.]152     | C2 server                        | lkcagar[.]com              | #c2 #root           |
-| 78.128.113[.]102    | C2 server                        | -                          | #c2 #root           |
-| 83.242.96[.]30      | Possible FTP server              | -                          | #ftp                |
-| 88.214.25[.]242     | Possible C2 server               | shopttkoltrok[.]com        | #c2 #root           |
-| 88.214.25[.]244     | VPN server (?)                   | -                          | #vpn                |
-| 88.214.25[.]250     | Possible C2 server               | rokllofrold29[.]com        | #c2 #root           |
-| 88.214.26[.]31      | Possible C2 server               | tsvsnjv[.]com              | #c2 #root           |
-| 88.214.26[.]33      | Active node, Bulgaria            | fivecloud[.]net            | #proxy #active      |
-| 91.238.181[.]250    | Possible C2 server               | xaracc556[.]com            | #c2 #root           |
-| 92.118.36[.]203     | C2 server                        | jmvummtu333[.]com          | #c2 #root           |
-| 91.191.209[.]70     | C2 server                        | -                          | #c2 #root           |
-| 91.191.209[.]110    | Possible C2 server               | -                          | #c2                 |
-| 94.228.169[.]123    | C2 server                        | -                          | #c2 #root           |
-| 94.228.169[.]143    | RDP bot                          | -                          | #rdp #administrator |
-| 104.200.72[.]124    | Mail server (Mail-in-a-Box)      | mailinabox[.]email         | #mail               |
-| 141.98.80[.]158     | C2 server                        | umomrmwa[.]com             | #c2 #root           |
-| 141.98.81[.]48      | C2 server                        | -                          | #c2 #root           |
-| 141.98.9[.]152      | C2 server                        | -                          | #c2 #root           |
-| 147.78.47[.]48      | Active server, Netherlands       | mnets[.]net                | #c2 #active         |
-| 149.248.76[.]130    | Likely C2 server                 | -                          | #c2                 |
-| 176.174.149[.]37    | C2 server (DarkGate reference)   | -                          | #c2 #darkgate       |
-| 178.236.247[.]73    | C2 server                        | -                          | #c2 #root           |
-| 179.60.149[.]5      | ESXi Server                      | -                          | #esxi #epo          |
-| 179.60.149[.]10     | C2 Server                        | -                          | #c2 #root           |
-| 179.60.149[.]241    | C2 Server                        | -                          | #c2 #admin          |
-| 179.60.149[.]243    | C2 Server                        | -                          | #c2 #root           |
-| 179.60.149[.]244    | C2 Server                        | zzerxc[.]com               | #c2 #root           |
-| 179.60.149[.]235    | VPN Server (?)                   | -                          | #vpn                |
-| 185.244.216[.]102   | C2 / Proxy bot                   | -                          | #c2 #proxy          |
-| 194.165.17[.]9      | C2 server                        | -                          | #c2 #root           |
-| 194.165.16[.]55     | Possible C2 server               | -                          | #c2                 |
-| 194.165.16[.]16     | Possible C2 server               | -                          | #c2 #root           |
+### Registry and VPN Discovery Artifacts
 
+The logs include explicit checks for common enterprise VPN products. These strings are useful for retrospective EDR, Sysmon, PowerShell, and command-line hunting.
 
+| Artifact | Context |
+| --- | --- |
+| `HKLM\\SOFTWARE\\Cisco` | VPN discovery |
+| `HKLM\\SYSTEM\\CurrentControlSet\\services\\Citrix User Profile Manager` | Citrix discovery |
+| `HKLM\\SOFTWARE\\Palo Alto Networks\\GlobalProtect\\PanGPS` | GlobalProtect discovery |
+| `HKLM\\SOFTWARE\\Palo Alto Networks\\GlobalProtect\\Settings` | GlobalProtect discovery |
+| `HKLM\\SOFTWARE\\Fortinet\\FortiClient` | FortiClient discovery |
+| `HKLM\\Software\\Fortinet\\FortiClient\\Sslvpn\\Tunnels` | FortiClient discovery |
+| `HKLM\\SOFTWARE\\SonicWall\\SSL-VPN NetExtender\\Standalone` | SonicWall discovery |
+| `HKLM\\SOFTWARE\\SonicWall\\SSL-VPN NetExtender\\Standalone\\Profiles` | SonicWall discovery |
+| `C:\\Program Files\\Palo Alto Networks\\GlobalProtect\\PanGPA.exe` | Host artifact |
 
-Each IP address entry is enriched with:
-- Server purpose and function
-- Domains (if available)
-- OSINT status (e.g., "still active")
-- Server usernames/passwords (if recovered)
+### Command and Tooling Artifacts
 
----
+| Artifact | Context |
+| --- | --- |
+| `proxychains python3 secretsdump.py ... -inputfile hosts.txt` | Credential dumping at scale through a proxy |
+| `./teamserver <ip> <password> ./xxxx.profile` | COBA / teamserver launch pattern |
+| `Trojan:Script/ObfusScript.A!ml` | Defender detection observed during VBS testing |
+| `Nighthawk` | Payload or framework named in testing on September 23 |
+| `DarkGate` | Malware and loader testing referenced repeatedly |
+| `Brute Ratel` | Operator-tested post-exploitation framework referenced in October 2023 |
+| `Rubeus.exe kerberoast /format:hashcat /outfile:C:\Users\Public\kekhash.txt` | Kerberoast collection artifact |
+| `nohup sh -c '/tmp/encryptor -killesxi'` | ESXi locker execution string |
+| `esxcli system settings encryption set --require-exec-installed-only=F` | ESXi configuration change associated with locker activity |
 
-## 🛠 Tooling / Malware References
+## Victim and Targeting References
 
-| Tool / Resource | Context |
-|------------------|---------|
-| Temp.SH          | Temporary file sharing used for payloads |
-| Hybrid Analysis  | Used to baseline DarkGate sample behavior |
-| Tria.ge          | Analysis of obfuscated loader             |
-| ProxyTraff       | Premium proxy provider                   |
-| Random_C2_Profile| Custom Cobalt Strike profiles             |
+These are not malicious indicators by themselves, but they are useful scoping pivots for incident response, victim notification, and historical correlation.
 
----
+| Indicator | Context |
+| --- | --- |
+| `miratechgroup[.]com` | Live-access discussion on September 20 |
+| `mymiratech[.]com` | Alternate internal domain reference tied to the same access |
+| `tanatexchemicals[.]com` | Operator target-handling discussion on September 20 |
+| `metricstream[.]com` | Domain access and system info discussion on September 21 |
+| `ingeus[.]co[.]uk` | Kerberos hash and access discussion |
+| `fortive[.]com` | High-value victim profiling and later credential activity |
+| `alsoenergy[.]com` | Enterprise VPN access list reference |
+| `ticketmaster[.]com` | Enterprise VPN access list reference |
+| `medline[.]com` | Enterprise VPN access list reference |
+| `bell[.]ca` | Enterprise VPN access list reference |
+| `ameritrustgroup[.]com` | Target needing SOCKS-enabled access |
+| `innophos[.]com` | Target needing SOCKS-enabled access |
 
-## 🧠 Behavioral Analytics
+## Analyst Notes
 
-This section consolidates notable tactics, reconnaissance patterns, and analyst-verified behavior observed across infrastructure and payload staging.
-
-- Monitoring presence across OSINT feeds (e.g., VirusTotal, MalwareBazaar)
-- Checking VBS payloads in sandbox environments (Hybrid Analysis, Tria.ge)
-- Leveraging random profile generation for Cobalt Strike beacons
-- Usage of temporary file sharing infrastructure (Temp.SH)
-- Division of actor duties between reconnaissance, staging, and distribution
-
-See `timeline.md` and `infrastructure.md` for extended reference, indicators, and case-linked detections.
+- The most stable malicious pivots in this set are the COBA proxy and teamserver pairs, `temp.sh` delivery paths, and the staged RDP infrastructure.
+- XLL, VBS, and MSI were swapped repeatedly to evade detection and improve delivery rates.
+- VPN product discovery strings are high-value host artifacts because they map directly to the actor's target selection workflow.
+- The 2024 corpus adds a second major cluster of pivots around validated VPN and RDWeb access, GhostSocks or backconnect infrastructure, and ESXi locker operations.

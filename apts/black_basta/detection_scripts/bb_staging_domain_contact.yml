@@ -1,0 +1,30 @@
+title: Black Basta Delivery Infrastructure Contact TempSh Or Qazim
+id: c241619f-a954-4d16-8568-c7f38670d6fb
+status: experimental
+description: >
+  Detects endpoint or proxy telemetry that shows contact with temp.sh or qaz.im, both of which were used
+  extensively in Black Basta payload staging and attachment testing. This rule targets Windows Sysmon-style
+  network events; create a parallel rule against proxy or DNS logs for cross-platform coverage.
+references:
+  - https://attack.mitre.org/techniques/T1105/
+author: PoseidonsCave
+date: 2026-04-12
+tags:
+  - attack.command-and-control
+  - attack.t1105
+  - blackbasta
+logsource:
+  category: network_connection
+  product: windows
+detection:
+  hostname:
+    DestinationHostname|contains:
+      - 'temp.sh'
+      - 'qaz.im'
+  url:
+    Initiated: 'true'
+  condition: hostname and url
+falsepositives:
+  - Users legitimately sharing files through the same services
+  - Research sandboxes pulling known payload URLs for analysis
+level: medium

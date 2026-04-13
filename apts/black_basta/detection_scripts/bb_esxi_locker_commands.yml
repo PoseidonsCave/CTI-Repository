@@ -1,0 +1,35 @@
+title: Black Basta ESXi Locker Command Patterns
+id: e88d9f6c-b9e8-4fa4-bd8e-83f1816f4f4f
+status: experimental
+description: >
+  Detects ESXi-focused command sequences and locker execution patterns that appeared in later Black Basta operational logs.
+  NOTE — ESXi is not standard Linux. This rule assumes process telemetry is forwarded from ESXi hosts to a
+  SIEM via syslog or an agent shim. Adapt the logsource mapping to your ESXi audit-forwarding pipeline.
+references:
+  - https://attack.mitre.org/techniques/T1059/004/
+  - https://attack.mitre.org/techniques/T1486/
+  - https://attack.mitre.org/techniques/T1489/
+author: PoseidonsCave
+date: 2026-04-12
+tags:
+  - attack.execution
+  - attack.impact
+  - attack.t1059.004
+  - attack.t1486
+  - attack.t1489
+  - blackbasta
+logsource:
+  category: process_creation
+  product: linux
+detection:
+  esxi_commands:
+    CommandLine|contains:
+      - 'esxcli vm process list'
+      - 'esxcli system settings encryption set --require-exec-installed-only=F'
+      - 'ps -i | grep encryptor'
+      - '/tmp/encryptor -killesxi'
+  condition: esxi_commands
+falsepositives:
+  - Authorized ESXi administration or incident response on isolated systems
+  - Internal ransomware simulation or recovery testing in lab environments
+level: high

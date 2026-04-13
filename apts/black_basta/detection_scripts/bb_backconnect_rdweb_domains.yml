@@ -1,0 +1,32 @@
+title: Black Basta Backconnect GhostSocks and RDWeb Infrastructure Contact
+id: c7270c95-4c4a-4c69-9613-b565cc76c28d
+status: experimental
+description: >
+  Detects network contact with later Black Basta infrastructure associated with backconnect, GhostSocks,
+  and RDWeb-style lure or sender domains. This rule targets Windows Sysmon-style network events; create a
+  parallel rule against proxy or DNS logs for cross-platform coverage.
+references:
+  - https://attack.mitre.org/techniques/T1090/
+  - https://attack.mitre.org/techniques/T1071/001/
+author: PoseidonsCave
+date: 2026-04-12
+tags:
+  - attack.command-and-control
+  - attack.t1071.001
+  - attack.t1090
+  - blackbasta
+logsource:
+  category: network_connection
+  product: windows
+detection:
+  domains:
+    DestinationHostname|contains:
+      - 'backconnect.org'
+      - 'ghostsocks.net'
+      - 'rdweb-page.com'
+      - 'rdweb-page.net'
+  condition: domains
+falsepositives:
+  - Sinkhole, research, or malware-analysis traffic in controlled environments
+  - Security teams intentionally probing listed infrastructure for validation
+level: medium

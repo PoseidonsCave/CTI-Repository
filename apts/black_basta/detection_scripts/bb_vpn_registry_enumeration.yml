@@ -1,0 +1,33 @@
+title: Black Basta Enterprise VPN Registry Discovery
+id: 8dc4a115-6e99-4fba-810c-cc07c7452f42
+status: experimental
+description: Detects reg.exe queries for enterprise VPN and remote access artifacts explicitly enumerated in the Black Basta logs.
+references:
+  - https://attack.mitre.org/techniques/T1016/
+author: PoseidonsCave
+date: 2026-04-12
+tags:
+  - attack.discovery
+  - attack.t1016
+  - blackbasta
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  image:
+    Image|endswith: '\reg.exe'
+  query:
+    CommandLine|contains:
+      - 'HKLM\\SOFTWARE\\Cisco'
+      - 'Citrix User Profile Manager'
+      - 'Palo Alto Networks\\GlobalProtect\\PanGPS'
+      - 'Palo Alto Networks\\GlobalProtect\\Settings'
+      - 'Fortinet\\FortiClient'
+      - 'FortiClient\\Sslvpn\\Tunnels'
+      - 'SonicWall\\SSL-VPN NetExtender\\Standalone'
+      - 'SonicWall\\SSL-VPN NetExtender\\Standalone\\Profiles'
+  condition: image and query
+falsepositives:
+  - IT inventory or troubleshooting scripts
+  - VPN support diagnostics by administrators
+level: medium
