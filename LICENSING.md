@@ -33,6 +33,12 @@ The full Apache 2.0 text is available at
 Third-party material, if any, remains subject to its original license or
 terms.
 
+Raw malware samples, proprietary tools, leaked data, and other third-party
+artifacts are not covered by the repository's default license unless they
+are explicitly identified as licensed contributions. Analysis notes,
+writeups, extracted indicators, and detection content remain governed by
+the repository license model described above.
+
 ### Ethical Use Statement
 
 The repository's ethical-use language expresses project intent and

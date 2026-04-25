@@ -1,0 +1,30 @@
+.DS_Store
+
+# Local malware-analysis working artifacts
+*.7z
+*.apk
+*.bin
+*.class
+*.dll
+*.dmg
+*.dylib
+*.elf
+*.exe
+*.iso
+*.jar
+*.o
+*.pyc
+*.rar
+*.so
+*.tar
+*.tar.gz
+*.tgz
+*.war
+*.zip
+
+# Decompiler and sandbox output
+decompiled/
+extracted/
+remnux-output/
+sandbox-output/
+samples/

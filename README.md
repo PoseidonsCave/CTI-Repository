@@ -11,6 +11,9 @@ In addition to adversary tracking, this project also focuses on:
 * IOC curation and enrichment
 * Context-driven case files and timeline analysis
 
+Current malware-analysis case files are indexed in
+[malware-analysis/index.md](malware-analysis/index.md).
+
 ---
 
 ## How Can I Contribute?
