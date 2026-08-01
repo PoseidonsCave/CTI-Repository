@@ -1,0 +1,32 @@
+title: TA4922-Observed Cruciferra Ardrv Driver Service Installation
+id: 8d8906fe-a898-4af1-9f49-f5587578ee67
+status: experimental
+description: >
+  Detects installation of the PcaSvc_procmon service pointing to pcdhost.sys,
+  the service and driver filename artifacts recovered from the analyzed
+  TA4922-corroborated 33863 Cruciferra build. A match requires additional
+  sample or execution-chain context for actor attribution.
+references:
+  - https://attack.mitre.org/techniques/T1543/003/
+author: PoseidonsCave
+date: 2026-07-30
+tags:
+  - attack.persistence
+  - attack.t1543.003
+  - ta4922
+logsource:
+  product: windows
+  service: system
+detection:
+  service_event:
+    EventID: 7045
+    ServiceName: 'PcaSvc_procmon'
+  path_image:
+    ImagePath|endswith: '\pcdhost.sys'
+  path_service:
+    ServiceFileName|endswith: '\pcdhost.sys'
+  condition: service_event and 1 of path_*
+falsepositives:
+  - Internal security testing that deliberately reproduces the same service
+    and filename artifacts.
+level: high

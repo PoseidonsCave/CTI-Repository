@@ -1,0 +1,22 @@
+title: Vulnerable Ardrv Exact Driver Load
+id: 9395b88c-224c-4309-8dc6-4c57036a4771
+status: experimental
+description: >
+  Detects the exact ardrv.sys hash recovered from the local Cruciferra
+  payload in Windows driver-load telemetry. Ardrv.sys is a legitimate
+  vulnerable driver; this event does not independently establish TA4922
+  attribution, exploitation, or process termination.
+references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-36425
+author: PoseidonsCave
+date: 2026-07-30
+logsource:
+  category: driver_load
+  product: windows
+detection:
+  exact_hash:
+    Hashes|contains: 'SHA256=07C5209BF83065FE760F4FEE4ED2308B0C523671F68CA73A3854C2C8C28C0541'
+  condition: exact_hash
+falsepositives:
+  - A legitimate installation of the matching OPSWAT AppRemover driver.
+level: high

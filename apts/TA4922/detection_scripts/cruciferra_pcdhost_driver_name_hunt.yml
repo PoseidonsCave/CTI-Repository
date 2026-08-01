@@ -1,0 +1,21 @@
+title: Cruciferra-Observed Pcdhost Driver Filename Hunt
+id: 2a32acc0-7a8d-43cd-83da-d1ddd3828057
+status: experimental
+description: >
+  Detects a Windows driver loaded as pcdhost.sys, the rename used for
+  ardrv.sys by the analyzed Cruciferra loader. A filename match does not
+  establish the driver identity, vulnerability use, or actor attribution.
+references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-36425
+author: PoseidonsCave
+date: 2026-07-30
+logsource:
+  category: driver_load
+  product: windows
+detection:
+  observed_name:
+    ImageLoaded|endswith: '\pcdhost.sys'
+  condition: observed_name
+falsepositives:
+  - Unrelated drivers or internal testing that reuse the pcdhost.sys filename.
+level: medium

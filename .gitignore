@@ -1,4 +1,18 @@
+# Operating-system and editor metadata
 .DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Language and tool caches
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
 
 # Local malware-analysis working artifacts
 *.7z
@@ -10,15 +24,21 @@
 *.dylib
 *.elf
 *.exe
+*.img
 *.iso
 *.jar
+*.lnk
 *.o
 *.pyc
 *.rar
+*.sys
 *.so
 *.tar
 *.tar.gz
 *.tgz
+*.vhd
+*.vhdx
+*.vmdk
 *.war
 *.zip
 

@@ -1,0 +1,30 @@
+title: ToggleDefender Script Cluster in PowerShell Telemetry
+id: c74f471f-5121-449d-859d-14efd74e193f
+status: experimental
+description: >-
+  Detects the distinctive ToggleDefender PowerShell cluster embedded as a
+  resource in the recovered VenomRAT-derived payload. This locally derived
+  capability hunt does not independently establish actor attribution.
+author: PoseidonsCave
+date: 2026-07-30
+tags:
+  - attack.defense-evasion
+  - attack.privilege-escalation
+  - attack.t1548.002
+  - attack.t1562.001
+logsource:
+  category: ps_script
+  product: windows
+detection:
+  selection:
+    ScriptBlockText|contains|all:
+      - 'ToggleDefender'
+      - 'SilentCleanup'
+      - 'RpcSs-TOGGLE'
+      - 'SecurityHealthSystray'
+      - 'MpCmdRun.exe'
+  condition: selection
+falsepositives:
+  - Authorized security-testing or Defender-administration scripts containing
+    the same ToggleDefender string cluster
+level: high

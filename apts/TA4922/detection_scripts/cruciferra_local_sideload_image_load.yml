@@ -1,0 +1,41 @@
+title: Local Cruciferra Secur32 DLL Side-Load
+id: a433478c-07a1-489c-9920-7c400af0a800
+status: experimental
+description: >
+  Detects either a known local Cruciferra Secur32.dll hash or a non-system
+  Secur32.dll loaded by one of the two legitimate executables observed in the
+  analyzed Tax-Number disk images. The 33863 chain is TA4922-corroborated;
+  the related 119863 image is not independently attributed to TA4922.
+references:
+  - https://attack.mitre.org/techniques/T1574/001/
+author: PoseidonsCave
+date: 2026-07-30
+tags:
+  - attack.execution
+  - attack.defense-evasion
+  - attack.t1574.001
+logsource:
+  category: image_load
+  product: windows
+detection:
+  sideload_pair:
+    Image|endswith:
+      - '\Tax-Number33863.exe'
+      - '\Tax-Number119863.exe'
+      - '\a2start.exe'
+      - '\LogView.exe'
+    ImageLoaded|endswith: '\Secur32.dll'
+  known_hash:
+    Hashes|contains:
+      - 'SHA256=DDEBC8CCAB9F58EB37C48937926ECD51C7973AFEF9DCF066AFD602944A4F5A9F'
+      - 'SHA256=5F7E21981F76E7C1C909D92969858EFF990E23DDC21071D7FE8EC1603994121D'
+  system_copy:
+    ImageLoaded|startswith:
+      - 'C:\Windows\System32\'
+      - 'C:\Windows\SysWOW64\'
+  condition: known_hash or (sideload_pair and not system_copy)
+falsepositives:
+  - Portable or locally installed copies of the named legitimate applications
+    may intentionally ship a private Secur32.dll and require allowlisting.
+  - Renamed executables matching the observed host filenames.
+level: high

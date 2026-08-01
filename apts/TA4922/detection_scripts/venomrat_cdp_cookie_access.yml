@@ -1,0 +1,32 @@
+title: Suspicious Headless Chromium Cookie Access Pattern
+id: d7a5b345-7777-44c8-aac8-50459dd0b6c2
+status: experimental
+description: >-
+  Detects the Chromium command-line combination used by the recovered
+  VenomRAT-derived CdpCookieGrabber to expose the DevTools protocol and request
+  browser cookies. This is a locally derived capability hunt and does not
+  independently establish actor attribution.
+author: PoseidonsCave
+date: 2026-07-30
+tags:
+  - attack.credential-access
+  - attack.t1539
+  - attack.t1555.003
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_image:
+    Image|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+  selection_command:
+    CommandLine|contains|all:
+      - '--remote-debugging-port=9222'
+      - '--headless=new'
+      - '--user-data-dir='
+      - '--disable-logging'
+  condition: selection_image and selection_command
+falsepositives:
+  - Authorized browser automation, testing, or debugging using the same fixed port and flags
+level: medium

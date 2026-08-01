@@ -1,0 +1,33 @@
+title: TA4922-Configured VenomRAT-Derived Payload Connection
+id: f45e371e-d733-4f19-b3c1-434e3370e6db
+status: experimental
+description: >
+  Detects endpoint network connections to either C2 address decrypted from the
+  analyzed VenomRAT-derived payload on its configured TCP port. The
+  local files do not establish current endpoint ownership or availability,
+  and a match does not independently establish TA4922 attribution.
+references:
+  - https://attack.mitre.org/techniques/T1095/
+  - https://attack.mitre.org/techniques/T1573/002/
+author: PoseidonsCave
+date: 2026-07-30
+tags:
+  - attack.command-and-control
+  - attack.t1095
+  - attack.t1573.002
+  - ta4922
+logsource:
+  category: network_connection
+  product: windows
+detection:
+  c2:
+    DestinationIp:
+      - '103.59.103.93'
+      - '103.97.128.141'
+    DestinationPort: 4449
+    Initiated: 'true'
+  condition: c2
+falsepositives:
+  - Authorized malware research or controlled detonation in an isolated lab.
+  - Later address reassignment or unrelated use.
+level: high
