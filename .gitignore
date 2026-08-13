@@ -48,3 +48,7 @@ extracted/
 remnux-output/
 sandbox-output/
 samples/
+
+# Case samples retained locally for regression tests; never publish raw malware
+/malware-analysis/xcsset/6fa938770e83ef2e177e8adf4a2ea3d2d5b26107c30f9d85c3d1a557db2aed41
+/malware-analysis/kimwolf-botnet/406647de09a0ffa279756b4ccb344b1b76a333320c5b50fd367901fa006cf0ff
